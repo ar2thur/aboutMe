@@ -47,7 +47,7 @@
 
         /* Section Styles */
         section {
-            padding: 40px 0;
+            padding: 40px;
             background: white;
             margin: 20px 0;
             border-radius: 8px;
@@ -58,6 +58,7 @@
             color: var(--secondary-color);
             border-bottom: 2px solid var(--secondary-color);
             padding-bottom: 10px;
+            margin-top: 0;
         }
 
         /* Experience & Skills */
@@ -136,15 +137,15 @@
 
     <div class="container">
         <section id="about">
-            <h2> About Me</h2>
-            <p> I am an aspiring Computer Science student at Kennesaw State University with hands-on experience in IT problem-solving, device jailbreaking, and computer building. Currently seeking opportunities to apply technical skills in the technology industry.</p>
+            <h2>About Me</h2>
+            <p>I am an aspiring Computer Science student at Kennesaw State University with hands-on experience in IT problem-solving, device jailbreaking, and computer building. Currently seeking opportunities to apply technical skills in the technology industry.</p>
         </section>
 
         <section id="experience">
-            <h2> Experience</h2>
+            <h2>Experience</h2>
             <div class="experience-item">
-                <h3> Sensei - Code Ninjas</h3>
-                <p><em> September 2024 - Present</em></p>
+                <h3>Sensei - Code Ninjas</h3>
+                <p><em>September 2024 - Present</em></p>
                 <ul>
                     <li>Train in coding curriculum and provide instruction to students</li>
                     <li>Foster collaboration between students to enhance learning experiences</li>
@@ -154,14 +155,14 @@
         </section>
 
         <section id="education">
-            <h2> Education</h2>
-            <h3> Kennesaw State University</h3>
-            <p> Bachelor of Science in Computer Science</p>
-            <p><em> Expected Graduation: 2028</em></p>
+            <h2>Education</h2>
+            <h3>Kennesaw State University</h3>
+            <p>Bachelor of Science in Computer Science</p>
+            <p><em>Expected Graduation: 2028</em></p>
         </section>
 
         <section id="skills">
-            <h2> Skills</h2>
+            <h2>Skills</h2>
             <div class="skills-list">
                 <span class="skill-item">IT Troubleshooting</span>
                 <span class="skill-item">Device Jailbreaking</span>
@@ -175,11 +176,11 @@
         </section>
 
         <section id="contact">
-            <h2> Contact Me</h2>
+            <h2>Contact Me</h2>
             <div class="contact-form">
                 <form id="contact-form">
-                    <input type="text" name="user_name" placeholder="Your Name" required>
-                    <input type="email" name="user_email" placeholder="Your Email" required>
+                    <input type="text" name="from_name" placeholder="Your Name" required>
+                    <input type="email" name="reply_email" placeholder="Your Email" required>
                     <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
                     <button type="submit">Send Message</button>
                 </form>
@@ -194,11 +195,20 @@
             document.getElementById('contact-form').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
+                const email = this.querySelector('[name="reply_email"]').value;
+                const message = this.querySelector('[name="message"]').value;
+                
+                const formData = {
+                    from_name: this.querySelector('[name="from_name"]').value,
+                    to_name: "William",
+                    message: `Email: ${email}\n\nMessage:\n${message}`
+                };
+                
                 const button = this.querySelector('button');
                 button.textContent = 'Sending...';
                 button.disabled = true;
 
-                emailjs.sendForm('service_3h729wc', 'template_7os47b9', this)
+                emailjs.send('service_3h729wc', 'template_7os47b9', formData)
                     .then(function() {
                         button.textContent = 'Message Sent!';
                         document.getElementById('contact-form').reset();
